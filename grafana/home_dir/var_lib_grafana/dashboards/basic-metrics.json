@@ -81,7 +81,7 @@
         },
         "gridPos": {
           "h": 8,
-          "w": 12,
+          "w": 14,
           "x": 0,
           "y": 0
         },
@@ -135,12 +135,450 @@
               "uid": "P0F15568B0DD880D0"
             },
             "queryType": "builder",
-            "rawSql": "SELECT timestamp as time,  count(questdb_physically_written_rows_total) physically_written_rows, count(questdb_http_connections) http_connections FROM \"questdb_metrics\" WHERE $__timeFilter(timestamp) SAMPLE BY $__sampleByInterval FILL ( LINEAR ) ALIGN TO CALENDAR",
+            "rawSql": "SELECT timestamp as time,  count(questdb_physically_written_rows_total) physically_written_rows, count(questdb_http_connections) http_connections FROM \"metrics_questdb\" WHERE $__timeFilter(timestamp) SAMPLE BY $__sampleByInterval FILL ( LINEAR ) ALIGN TO CALENDAR",
             "refId": "A"
           }
         ],
-        "title": "Panel Title",
+        "title": "Written Rows and HTTP Connections, sampled",
         "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "questdb-questdb-datasource",
+          "uid": "P0F17568B0DD880D0"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 10,
+          "x": 14,
+          "y": 0
+        },
+        "id": 7,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "datasource": {
+              "type": "questdb-questdb-datasource",
+              "uid": "P0F17568B0DD880D0"
+            },
+            "format": 1,
+            "meta": {
+              "builderOptions": {
+                "fields": [],
+                "limit": "100",
+                "mode": "list",
+                "timeField": ""
+              }
+            },
+            "queryType": "sql",
+            "rawSql": "wal_tables() order by suspended DESC, name ASC;",
+            "refId": "A",
+            "selectedFormat": 1
+          }
+        ],
+        "title": "Wal Tables (Suspended First)",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "questdb-questdb-datasource",
+          "uid": "P0F15568B0DD880D0"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 8
+        },
+        "id": 2,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "builderOptions": {
+              "fields": [
+                "*"
+              ],
+              "filters": [],
+              "groupBy": [],
+              "limit": "20",
+              "mode": "list",
+              "orderBy": [
+                {
+                  "dir": "DESC",
+                  "name": "timestamp"
+                }
+              ],
+              "partitionBy": [],
+              "table": "metrics_questdb",
+              "timeField": "timestamp"
+            },
+            "datasource": {
+              "type": "questdb-questdb-datasource",
+              "uid": "P0F15568B0DD880D0"
+            },
+            "queryType": "builder",
+            "rawSql": "SELECT * FROM \"metrics_questdb\" ORDER BY timestamp DESC LIMIT 20",
+            "refId": "A"
+          }
+        ],
+        "title": "Latest QuestDB Metrics",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "questdb-questdb-datasource",
+          "uid": "P0F15568B0DD880D0"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        },
+        "id": 4,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "builderOptions": {
+              "fields": [
+                "*"
+              ],
+              "filters": [],
+              "groupBy": [],
+              "limit": "20",
+              "mode": "list",
+              "orderBy": [
+                {
+                  "dir": "DESC",
+                  "name": "timestamp"
+                }
+              ],
+              "partitionBy": [],
+              "table": "metrics_cpu",
+              "timeField": "timestamp"
+            },
+            "datasource": {
+              "type": "questdb-questdb-datasource",
+              "uid": "P0F15568B0DD880D0"
+            },
+            "format": 1,
+            "queryType": "builder",
+            "rawSql": "SELECT * FROM \"metrics_cpu\" ORDER BY timestamp DESC LIMIT 20",
+            "refId": "A",
+            "selectedFormat": 1
+          }
+        ],
+        "title": "Latest CPU Metrics",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "questdb-questdb-datasource",
+          "uid": "P0F15568B0DD880D0"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 24
+        },
+        "id": 3,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "builderOptions": {
+              "fields": [
+                "*"
+              ],
+              "filters": [],
+              "groupBy": [],
+              "limit": "20",
+              "mode": "list",
+              "orderBy": [
+                {
+                  "dir": "DESC",
+                  "name": "timestamp"
+                }
+              ],
+              "partitionBy": [],
+              "table": "metrics_disk",
+              "timeField": "timestamp"
+            },
+            "datasource": {
+              "type": "questdb-questdb-datasource",
+              "uid": "P0F15568B0DD880D0"
+            },
+            "format": 1,
+            "queryType": "builder",
+            "rawSql": "SELECT * FROM \"metrics_disk\" ORDER BY timestamp DESC LIMIT 20",
+            "refId": "A",
+            "selectedFormat": 1
+          }
+        ],
+        "title": "Latest Disk Metrics",
+        "type": "table"
+      },
+      {
+        "datasource": {
+          "type": "questdb-questdb-datasource",
+          "uid": "P0F15568B0DD880D0"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "filterable": true,
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 24,
+          "x": 0,
+          "y": 31
+        },
+        "id": 5,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "enablePagination": true,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "11.0.0",
+        "targets": [
+          {
+            "builderOptions": {
+              "fields": [
+                "*"
+              ],
+              "filters": [],
+              "groupBy": [],
+              "limit": "20",
+              "mode": "list",
+              "orderBy": [
+                {
+                  "dir": "DESC",
+                  "name": "timestamp"
+                }
+              ],
+              "partitionBy": [],
+              "table": "metrics_diskio",
+              "timeField": "timestamp"
+            },
+            "datasource": {
+              "type": "questdb-questdb-datasource",
+              "uid": "P0F15568B0DD880D0"
+            },
+            "format": 1,
+            "queryType": "builder",
+            "rawSql": "SELECT * FROM \"metrics_diskio\" ORDER BY timestamp DESC LIMIT 20",
+            "refId": "A",
+            "selectedFormat": 1
+          }
+        ],
+        "title": "Latest DiskIO Metrics",
+        "type": "table"
       }
     ],
     "refresh": "5s",
@@ -158,6 +596,6 @@
     "timezone": "browser",
     "title": "Basic metrics",
     "uid": "basic-metrics",
-    "version": 3,
+    "version": 2,
     "weekStart": ""
   }

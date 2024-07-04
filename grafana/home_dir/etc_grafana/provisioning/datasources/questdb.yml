@@ -2,11 +2,13 @@ apiVersion: 1
 
 # list of datasources that should be deleted from the database
 deleteDatasources:
-  - name: qdb
+  - name: qdb-metrics
+    orgId: 1
+  - name: qdb-metadata
     orgId: 1
 
 datasources:
-  - name: qdb
+  - name: qdb-metrics
     type: questdb-questdb-datasource
     url: ${QDB_CLIENT_HOST}:${QDB_CLIENT_PORT}
     uid: P0F15568B0DD880D0
@@ -18,6 +20,24 @@ datasources:
       port: ${QDB_CLIENT_PORT}
       username: ${QDB_CLIENT_USER}
       tlsMode: ${QDB_SSL_MODE} # disable/require/verify-ca/verify-full
+      # timeout: <seconds>
+      # queryTimeout: <seconds>
+      maxOpenConnections: 100
+      maxIdleConnections: 100
+      maxConnectionLifetime: 14400
+
+  - name: qdb-metadata
+    type: questdb-questdb-datasource
+    url: ${QDB_CLIENT_METADATA_HOST}:${QDB_CLIENT_METADATA_PORT}
+    uid: P0F17568B0DD880D0
+    isDefault: false
+    secureJsonData:
+      password: ${QDB_CLIENT_METADATA_PASSWORD}
+    jsonData:
+      server: ${QDB_CLIENT_METADATA_HOST}
+      port: ${QDB_CLIENT_METADATA_PORT}
+      username: ${QDB_CLIENT_METADATA_USER}
+      tlsMode: ${QDB_METADATA_SSL_MODE} # disable/require/verify-ca/verify-full
       # timeout: <seconds>
       # queryTimeout: <seconds>
       maxOpenConnections: 100
