@@ -1,4 +1,4 @@
-# QuestDB Metrics
+# QuestDB Basic Monitoring
 
 This project collects metrics from a QuestDB instance using the prometheus endpoint, and from the host machine using
 the Telegraf CPU, Disk, and DiskIO inoput plugins. It stores all the metrics in QuestDB tables (it can be on a
