@@ -51,7 +51,7 @@ http://localhost:9000), you should see four tables with metrics data: `metrics_c
 `metrics_disk`, `metrics_diskio`, and `metrics_questdb`.
 
 If you want to check the dashboard, visit http://localhost:3000/d/basic-metrics. The
-default use is `admin` and default password is `quest`. The dashboard is meant to be a
+default user is `admin` and default password is `quest`. The dashboard is meant to be a
 minimal dashboard for inspiration. If you want to modify it, you will need to save a
 copy as the demo dashboard, as it is read-only.
 
