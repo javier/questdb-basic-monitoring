@@ -18,7 +18,6 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 1,
     "links": [],
     "panels": [
       {
@@ -136,7 +135,7 @@
               "uid": "P0F15568B0DD880D0"
             },
             "queryType": "builder",
-            "rawSql": "SELECT timestamp as time,  count(questdb_physically_written_rows_total) physically_written_rows, count(questdb_http_connections) http_connections FROM \"prometheus\" WHERE $__timeFilter(timestamp) SAMPLE BY $__sampleByInterval FILL ( LINEAR ) ALIGN TO CALENDAR",
+            "rawSql": "SELECT timestamp as time,  count(questdb_physically_written_rows_total) physically_written_rows, count(questdb_http_connections) http_connections FROM \"questdb_metrics\" WHERE $__timeFilter(timestamp) SAMPLE BY $__sampleByInterval FILL ( LINEAR ) ALIGN TO CALENDAR",
             "refId": "A"
           }
         ],
@@ -144,13 +143,14 @@
         "type": "timeseries"
       }
     ],
+    "refresh": "5s",
     "schemaVersion": 39,
     "tags": [],
     "templating": {
       "list": []
     },
     "time": {
-      "from": "now-6h",
+      "from": "now-5m",
       "to": "now"
     },
     "timeRangeUpdatedDuringEditOrView": false,
@@ -158,6 +158,6 @@
     "timezone": "browser",
     "title": "Basic metrics",
     "uid": "basic-metrics",
-    "version": 2,
+    "version": 3,
     "weekStart": ""
   }
