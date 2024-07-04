@@ -1,0 +1,14 @@
+# Log file
+*.log
+
+questdb_root/*
+!questdb_rootdb/.gitkeep
+
+
+.DS_Store
+.idea
+ilp_ingestion.iml
+.vscode/
+
+grafana/home_dir/var_lib_grafana/*
+!grafana/home_dir/var_lib_grafana/dashboards/
