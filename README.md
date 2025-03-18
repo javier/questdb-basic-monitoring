@@ -8,7 +8,9 @@ metadata.
 ## Dependencies
 
 You will need docker and docker-compose. If you want to monitor an external QuestDB instance, then you also need
-a running QuestDB, but this project starts a QuestDB that you can use and store the metrics within the same instance.
+a running QuestDB. This project starts a single QuestDB instance that is used both for reading metrics from and
+to store the metrics. For production you ideally read metrics from one external instance and store in another,
+which can be the dockerized QuestDB started by this project.
 
 The project will mount the local `qdb_root` folder as the QuestDB root for the dockerized instance. It will also mount
 the `grafana` folder to store local grafana data. It also mounts the host filesystem as read-only to collect monitoring
@@ -29,7 +31,7 @@ If you want to monitor an external questdb instance, please check the environmen
  `telegraf` section of the `docker-compose` file, and also change the last 6 environment variables at the `grafana`
  section, which point to the connection where to read metrics data from.
 
- If both the metadata instance (the one you monitor) and the metrics storage instance (which can be the same or not) are
+ If both the metadata instance (the one you monitor) and the metrics storage instance are
  externally available and you don't need to start a dockerized QuestDB, you can use the `docker-compose.local.yml`
  definition file instead.
 
