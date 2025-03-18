@@ -29,10 +29,14 @@ If you want to monitor an external questdb instance, please check the environmen
  `telegraf` section of the `docker-compose` file, and also change the last 6 environment variables at the `grafana`
  section, which point to the connection where to read metrics data from.
 
+ If both the metadata instance (the one you monitor) and the metrics storage instance (which can be the same or not) are
+ externally available and you don't need to start a dockerized QuestDB, you can use the `docker-compose.local.yml`
+ definition file instead.
+
 For example, the following command will collect metrics and metadata from the machine exposing metrics in port 19003 and
 will store them in the QuestDB machine available at http://host.docker.internal:29000. It will create two grafana
 connections, one to the original machine with pgwire port at 9912 (for metadata queries), and one at the target metrics
-machine with pgwire port at 7712.
+machine with pgwire port at 7712. It will not start QuestDB on a container.
 
 ```bash
 QUESTDB_METRICS_ENDPOINT=http://host.docker.internal:19003 \
@@ -41,7 +45,7 @@ QDB_CLIENT_METADATA_PORT=9912 \
 QUESTDB_HTTP_ENDPOINT=http://host.docker.internal:29000 \
 QDB_CLIENT_HOST=host.docker.internal \
 QDB_CLIENT_PORT=7712 \
-docker-compose up
+docker-compose -f  docker-compose.local.yml up
 ```
 
 ## Querying the metrics
